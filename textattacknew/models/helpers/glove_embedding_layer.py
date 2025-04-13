@@ -91,10 +91,11 @@ class GloveEmbeddingLayer(EmbeddingLayer):
     def __init__(self, emb_layer_trainable=False, glove_size=42):
         # glove_path = utils.download_from_s3(GloveEmbeddingLayer.EMBEDDING_PATH)
         # glove_word_list_path = os.path.join(glove_path, "glove.wordlist.npy")
-        print("WORKING DIR IS: ", os.getcwd())
-        data_root_path = '/data/xinyu/results/fgws/data/'  # , /home/zhangxinyu/data/fgws/data/
-        glove_word_list_path = '{}/pretrained/gloVe/glove_data/glove.{}B.300d.wordlist.npy'.format(data_root_path, glove_size)
-        glove_matrix_path = '{}/pretrained/gloVe/glove_data/glove.{}B.300d.mat.npy'.format(data_root_path, glove_size)
+        current_work_dir = str(os.getcwd()).replace("\\", "/") + "/"
+        print("WORKING DIR IS: ", current_work_dir)
+        data_root_path = current_work_dir + 'data/xinyu/results/fgws/data/'  # , /home/zhangxinyu/data/fgws/data/
+        glove_word_list_path = '{}pretrained/gloVe/glove_data/glove.{}B.300d.wordlist.npy'.format(data_root_path, glove_size)
+        glove_matrix_path = '{}pretrained/gloVe/glove_data/glove.{}B.300d.mat.npy'.format(data_root_path, glove_size)
         word_list = np.load(glove_word_list_path)
         # glove_matrix_path = os.path.join(glove_path, "glove.6B.200d.mat.npy")
         embedding_matrix = np.load(glove_matrix_path)
