@@ -176,7 +176,12 @@ class Trainer:
         if self.training_args.if_addnoise in [1, 5]:  # Staircase Mechanism
             self.staircase_mech = Staircase(epsilon=5 / self.training_args.syn_size, gamma=1, sensitivity=1, random_state=1)
         if self.training_args.if_addnoise in [5, 6]:  # Synonym Matrix
-            syn_path = '/data/xinyu/results/fgws/data/pretrained/paragramcf/'
+            
+            current_work_dir = str(os.getcwd()).replace("\\", "/")  ### Modified on 4/21
+            syn_path = current_work_dir + '/data/xinyu/results/fgws/data/pretrained/paragramcf/'
+            
+            # syn_path = '/data/xinyu/results/fgws/data/pretrained/paragramcf/'   ### original code
+            
             self.nn_matrix = np.load('{}syn_250/nn_matrix.npy'.format(syn_path), allow_pickle=True)
             self.word2index = np.load('{}wordlist.pickle'.format(syn_path), allow_pickle=True)
             self.index2word = np.load('{}index2word_default.pickle'.format(syn_path), allow_pickle=True)

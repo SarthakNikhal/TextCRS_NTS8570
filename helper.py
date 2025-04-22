@@ -1,4 +1,5 @@
 import copy
+import os
 import random
 import numpy as np
 from utils import load_pkl, shuffle_lists, clean_str
@@ -205,9 +206,18 @@ def load_data_textatk(model_type, dataset, mode):
     new_dataset = []
     base_path = "/data/xinyu/results/fgws/models/{}/{}/data".format('lstm', dataset)  # model_type
     # raw = list(load_pkl("{}/{}_raw.pkl".format(base_path, mode)))
-    texts = list(load_pkl("{}/{}_texts.pkl".format(base_path, mode)))
+    
+    # modified on 4/21
+    current_work_dir = str(os.getcwd()).replace("\\", "/")
+    texts = list(load_pkl(current_work_dir + "{}/{}_texts.pkl".format(base_path, mode)))
+    
+    # texts = list(load_pkl("{}/{}_texts.pkl".format(base_path, mode)))   ## original line
     raw = [' '.join(texts[i]) for i in range(len(texts))]
-    pols = list(load_pkl("{}/{}_pols.pkl".format(base_path, mode)))
+    
+    
+    pols = list(load_pkl(current_work_dir + "{}/{}_pols.pkl".format(base_path, mode)))   ## modified on 4/21
+    
+    # pols = list(load_pkl("{}/{}_pols.pkl".format(base_path, mode)))  #### original line
     raw, pols = shuffle_lists(raw, pols)
     for i in range(len(pols)):
         new_dataset.append((raw[i], pols[i]))

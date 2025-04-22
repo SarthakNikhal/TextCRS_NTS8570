@@ -294,8 +294,8 @@ class Config:
     os.environ["CUDA_VISIBLE_DEVICES"] = visible_devices
     project_root_path = "."
     # base_path = os.path.dirname(__file__)
-    data_root_path = "/data/xinyu/results/fgws/"  # /data/xinyu/results/fgws/, /home/zhangxinyu/data/fgws/
-    model_root_path = "/data/xinyu/results/fgws/"
+    data_root_path = "data/xinyu/results/fgws"  # /data/xinyu/results/fgws/, /home/zhangxinyu/data/fgws/
+    model_root_path = "data/xinyu/results/fgws/"
     save_path = '{}/models/{}/{}/'.format(model_root_path, model_type, dataset)
     model_name_suffix = ""
     if ae_data is not None:  # predict using adversarial text
@@ -440,7 +440,9 @@ class Config:
             f.close()
 
     cf_path = "{}/data/pretrained/counter-fitted/counter-fitted-vectors.txt".format(data_root_path)
-    glove_path = "/data/xinyu/results/fgws/data/pretrained/gloVe/glove.42B.300d.txt".format(data_root_path)  # 42B.300d
+    # glove_path = "/data/xinyu/results/fgws/data/pretrained/gloVe/glove.42B.300d.txt".format(data_root_path)  # 42B.300d
+    current_work_dir = str(os.getcwd()).replace("\\", "/")
+    glove_path = current_work_dir + "/data/xinyu/results/fgws/data/pretrained/gloVe/glove.42B.300d.txt"
 
     # LSTM
     path_to_pre_trained_init = "{}/data/{}/{}_pretrained_init.npy".format(data_root_path, dataset, max_len)
